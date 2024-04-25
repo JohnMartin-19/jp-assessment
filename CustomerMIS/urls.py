@@ -21,7 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/v1/", include("customers.urls")),
     path('api-auth/', include('rest_framework.urls')), # for Login nad Logout APIView
-    
+    #login/logout api endpoint
+    path("api/v1/dj-rest-auth/", include("dj_rest_auth.urls")),
 
 ]
 
