@@ -18,7 +18,7 @@ class Customers(models.Model):
     nationality = models.CharField(max_length=50)
 
     def __str__(self):
-        return  f"{self.name} + {self.nationality} + {self.phone}"
+        return  f"{self.name} "
     
 
 
