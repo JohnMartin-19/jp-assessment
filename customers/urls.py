@@ -9,6 +9,6 @@ urlpatterns = [
 
     #api endpoint to retreive all the business details(nested)
     #'GET' method allowed only
-    path('all_business/', GetBusiness.as_view(), name = 'Nested Business Dtails'), #for getting all businesses in the system
+    path('all_business/', GetBusiness.as_view(), name = 'Nested Business Details'), #for getting all businesses in the system
 
 ]

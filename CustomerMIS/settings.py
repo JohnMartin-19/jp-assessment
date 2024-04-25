@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     #3rd party
     'rest_framework',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -56,12 +57,22 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+#ports allowed to consume our apis
+CORS_ORIGIN_WHITELIST = (
+"http://localhost:3000",#react
+'http://localhost:5000',#angular
+"http://localhost:8000",
+)
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",'http://localhost:5000']
 
 ROOT_URLCONF = 'CustomerMIS.urls'
 
