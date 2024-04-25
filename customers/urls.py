@@ -1,10 +1,14 @@
 from  django.urls import path
-from .views import CustomerList,CustomerDetail,BusinessList,BusinessDetail
+from .views import CustomerList,CustomerDetail,BusinessList,BusinessDetail,GetBusiness
 
 urlpatterns = [
-    path('<int:pk>/', CustomerDetail.as_view(),name = 'customer_detail'),
-    path('', CustomerList.as_view( name ='customer_list')),
-    path('<int:pk>/', BusinessDetail.as_view(),name = 'business_detail'),
-    path('', BusinessList.as_view( name ='business_list')),
+    path('customers/<int:pk>/', CustomerDetail.as_view(),name = 'customer_detail'),
+    path('customers/', CustomerList.as_view(), name ='customer_list'),
+    path('business/<int:pk>/', BusinessDetail.as_view(),name = 'business_detail'),
+    path('business/', BusinessList.as_view(),name ='business_list'),
+
+    #api endpoint to retreive all the business details(nested)
+    #'GET' method allowed only
+    path('all_business/', GetBusiness.as_view(), name = 'Nested Business Dtails'), #for getting all businesses in the system
 
 ]

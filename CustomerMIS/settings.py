@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     #apps
     "accounts.apps.AccountsConfig",
     "customers.apps.CustomersConfig",
+
+    #3rd party
+    'rest_framework',
 ]
 
 REST_FRAMEWORK = {
