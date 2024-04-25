@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets,generics
 from  .models import Business,Customers
-from .serializers import BusinessSerializer,CustomerSerializer,getBusinessSerializer
-
+from .serializers import BusinessSerializer,CustomerSerializer,getBusinessSerializer,MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 class CustomerList(generics.ListCreateAPIView):
     queryset = Customers.objects.all()
     serializer_class = CustomerSerializer
@@ -21,3 +21,6 @@ class  GetBusiness(generics.ListAPIView):
     queryset = Business.objects.all()
     serializer_class = getBusinessSerializer
     
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

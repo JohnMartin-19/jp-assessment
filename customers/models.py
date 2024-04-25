@@ -28,6 +28,7 @@ class Business(models.Model):
     registration_date = models.DateField()
     location = models.CharField(max_length=50, null=True)
     category = models.CharField(max_length=50, choices=BUSINESS_CATEGORIES)
+   # age = models.IntegerField(datetime.today() - self.registration_date) # type: ignore
     owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
     
     @property

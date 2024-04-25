@@ -16,6 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework_simplejwt.views import ( # type: ignore
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,7 +28,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')), # for Login nad Logout APIView
     #login/logout api endpoint
     path("api/v1/dj-rest-auth/", include("dj_rest_auth.urls")),
-
+    
+    
 ]
 
 
