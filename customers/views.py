@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets,generics
 from  .models import Business,Customers
 from .serializers import BusinessSerializer,CustomerSerializer,getBusinessSerializer,MyTokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView # type: ignore
 class CustomerList(generics.ListCreateAPIView):
     queryset = Customers.objects.all()
     serializer_class = CustomerSerializer
