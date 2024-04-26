@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
+    'drf_spectacular',
 ]
 
 REST_FRAMEWORK = {
@@ -103,7 +104,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    "DEFAULT_SCHEMA_CLASS":"drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "CustomerMIS API Project",
+    "DESCRIPTION": "An API project for CustomerMIS",
+    "VERSION": "1.0.0",
+# OTHER SETTINGS
 }
 
 MIDDLEWARE = [
