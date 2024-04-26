@@ -112,7 +112,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "CustomerMIS API Project",
     "DESCRIPTION": "An API project for CustomerMIS",
     "VERSION": "1.0.0",
-# OTHER SETTINGS
+
 }
 
 MIDDLEWARE = [

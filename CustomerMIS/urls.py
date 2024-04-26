@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from rest_framework_simplejwt.views import ( # type: ignore
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
+from drf_spectacular.views import SpectacularAPIView # type: ignore
+from drf_spectacular.views import ( # type: ignore
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,8 +29,13 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')), # for Login nad Logout APIView
     #login/logout api endpoint
     path("api/v1/dj-rest-auth/", include("dj_rest_auth.urls")),
-    
-    
+    #drf spectacular schema api endpoint
+    path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/v1/schema/redoc/", SpectacularRedocView.as_view(
+    url_name="schema"), name="redoc",),
+    path("api/v1/schema/swagger-ui/", SpectacularSwaggerView.as_view(
+    url_name="schema"), name="swagger-ui"),
+
 ]
 
 
