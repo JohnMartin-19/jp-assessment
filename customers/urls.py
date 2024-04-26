@@ -1,5 +1,5 @@
 from  django.urls import path
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView # type: ignore
 from .views import CustomerList,CustomerDetail,BusinessList,BusinessDetail,GetBusiness,MyTokenObtainPairView
 urlpatterns = [
     path('customers/<int:pk>/', CustomerDetail.as_view(),name = 'customer_detail'),
