@@ -32,17 +32,15 @@ class Business(models.Model):
     age = models.IntegerField(null =True) # type: ignore
     owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
     
-    def calculate_business_age(self):
-        today = timezone.now().date()
-        reg_date = self.registration_date
-        years = today.year - reg_date.year
-        if today.month < reg_date.month or (today.month == reg_date.month and today.day < reg_date.day):
-            years -= 1
-        return years
+    def business_age(self):
+        today = datetime.now().date()
+        age = today.year - self.registration_date.year - ((today.month, today.day) < (self.registration_date.month, self.registration_date.day))
+        return age
 
     @property
-    def business_age(self):
-        return self.calculate_business_age()
+    def save(self):
+        self.age = self.business_age()
+        super().save()
 
 
     def __str__(self):
