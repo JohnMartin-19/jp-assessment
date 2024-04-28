@@ -36,15 +36,14 @@ class Business(models.Model):
     owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
 
     def calculate_business_age(self):
-        import datetime
         today = datetime.date.today()
         age = today - self.registration_date
         return age.days // 365  # Calculate years of operation
 
     @property
     def business_age(self):
+        self.age = self.calculate_business_age()
         super().save(force_insert=True)
-        return self.calculate_business_age()
     
     
 
