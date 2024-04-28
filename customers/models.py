@@ -43,19 +43,10 @@ class Business(models.Model):
 
     @property
     def business_age(self):
+        super().save(force_insert=True)
         return self.calculate_business_age()
     
-    """
-    def business_age(self):
-        today = datetime.now().date()
-        age = today.year - self.registration_date.year - ((today.month, today.day) < (self.registration_date.month, self.registration_date.day))
-        return age
-
-    @property
-    def save(self):
-        self.age = self.business_age()
-        super().save()
-    """
+    
 
     def __str__(self):
         return f"{self.business_name} | {self.owner}"
