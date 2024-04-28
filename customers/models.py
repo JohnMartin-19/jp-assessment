@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime,timedelta
+from django.utils import timezone
 # Create your models here.
 
 BUSINESS_CATEGORIES = (
@@ -28,17 +29,20 @@ class Business(models.Model):
     registration_date = models.DateField()
     location = models.CharField(max_length=50, null=True)
     category = models.CharField(max_length=50, choices=BUSINESS_CATEGORIES)
-   # age = models.IntegerField(datetime.today() - self.registration_date) # type: ignore
+    age = models.IntegerField(null =True) # type: ignore
     owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
     
+    def calculate_business_age(self):
+        today = timezone.now().date()
+        reg_date = self.registration_date
+        years = today.year - reg_date.year
+        if today.month < reg_date.month or (today.month == reg_date.month and today.day < reg_date.day):
+            years -= 1
+        return years
+
     @property
-    def age(self):
-        
-        #Calculate the age of the business based on the registration date.
-        
-        today = datetime.today().date()
-        age = today.year - self.registration_date.year - ((today.month, today.day) < (self.registration_date.month, self.registration_date.day))
-        return age
+    def business_age(self):
+        return self.calculate_business_age()
 
 
     def __str__(self):
