@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer # type: ignore
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Customers,Business
 from accounts.models import  CustomUser
 class CustomerSerializer(serializers.ModelSerializer):
@@ -11,13 +11,13 @@ class  BusinessSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Business
-        fields = ('id', 'business_name', 'registration_date', 'owner','location','category','owner')
+        fields = ('id', 'business_name', 'registration_date','age', 'owner','location','location_building_name','category','owner')
 
 class getBusinessSerializer(serializers.ModelSerializer):
     owner = CustomerSerializer()
     class Meta:
         model = Business
-        fields = ('id', 'business_name', 'registration_date','location','category', 'owner')
+        fields = ('id', 'business_name', 'registration_date','location','category','owner')
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

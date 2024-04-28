@@ -28,10 +28,24 @@ class Business(models.Model):
     business_name = models.CharField(max_length=100)
     registration_date = models.DateField()
     location = models.CharField(max_length=50, null=True)
+    location_sub_county = models.CharField(max_length=100,null=True)
+    location_ward = models.CharField(max_length=100,null=True)
+    location_building_name = models.CharField(max_length=255,null=True)
     category = models.CharField(max_length=50, choices=BUSINESS_CATEGORIES)
     age = models.IntegerField(null =True) # type: ignore
     owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
+
+    def calculate_business_age(self):
+        import datetime
+        today = datetime.date.today()
+        age = today - self.registration_date
+        return age.days // 365  # Calculate years of operation
+
+    @property
+    def business_age(self):
+        return self.calculate_business_age()
     
+    """
     def business_age(self):
         today = datetime.now().date()
         age = today.year - self.registration_date.year - ((today.month, today.day) < (self.registration_date.month, self.registration_date.day))
@@ -41,7 +55,7 @@ class Business(models.Model):
     def save(self):
         self.age = self.business_age()
         super().save()
-
+    """
 
     def __str__(self):
         return f"{self.business_name} | {self.owner}"
