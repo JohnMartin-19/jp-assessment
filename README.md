@@ -4,7 +4,7 @@ The above project was an assessment test for Backend Dvelopment. Done using Pyth
 
 
 # Auth
-I implememted the JWT  authentication in this project. To generate a token, you need to send a POST request with username and password, and you will be granted an access token
+I implememted the JWT  authentication in this project. To generate a token, you need to send a POST request  to the token url with username and password, and you will be granted an access token
 
 # Documentation
 I have documented my API endpoints using swagger UI. The endpoint is accessible as stated in the urls.py file.
