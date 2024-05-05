@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime,timedelta
 from django.utils import timezone
+from django.core.validators import MinValueValidator
 # Create your models here.
 
 BUSINESS_CATEGORIES = (
@@ -9,6 +10,7 @@ BUSINESS_CATEGORIES = (
     ('Transportation', 'Transportation'),
     ('Service','Service'),
     ('Banking','Banking'),
+    ("other","other"),
 ) 
 
 class Customers(models.Model):
@@ -32,18 +34,33 @@ class Business(models.Model):
     location_ward = models.CharField(max_length=100,null=True)
     location_building_name = models.CharField(max_length=255,null=True)
     category = models.CharField(max_length=50, choices=BUSINESS_CATEGORIES)
-    age = models.IntegerField(null =True) # type: ignore
+    age = models.IntegerField(null =True,validators=[MinValueValidator(0)]) # type: ignore
     owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
 
     def calculate_business_age(self):
-        today = datetime.date.today()
-        age = today - self.registration_date
-        return age.days // 365  # Calculate years of operation
+        today = datetime.now().date()  # Get the current date
+        age = today.year - self.registration_date.year
+        return age
 
-    @property
+    def save(self):
+        if self.registration_date and not self.age:
+            self.age = self.calculate_business_age()
+        super().save()
+
+    """
+     @property
     def business_age(self):
         self.age = self.calculate_business_age()
         super().save(force_insert=True)
+    
+        
+    def calculate_business_age(self):
+        today = datetime.date.now()
+        age = today - self.registration_date
+        return age.days // 365  # Calculate years of operation
+    """
+   
+    
     
     
 

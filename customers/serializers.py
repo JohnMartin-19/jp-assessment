@@ -11,13 +11,17 @@ class  BusinessSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Business
-        fields = ('id', 'business_name', 'registration_date','age', 'owner','location','location_building_name','category','owner')
+        fields = ('id', 'business_name', 'age','registration_date','location','location_building_name','category','owner')
 
+    def create(self, validated_data):
+        business = Business(**validated_data)
+        business.save()
+        return business
 class getBusinessSerializer(serializers.ModelSerializer):
     owner = CustomerSerializer()
     class Meta:
         model = Business
-        fields = ('id', 'business_name', 'registration_date','location','category','owner')
+        fields = ('id', 'business_name', 'registration_date','location','category','owner',"age")
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
