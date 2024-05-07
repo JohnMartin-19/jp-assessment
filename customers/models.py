@@ -42,10 +42,13 @@ class Business(models.Model):
         age = today.year - self.registration_date.year
         return age
 
-    def save(self):
-        if self.registration_date and not self.age:
-            self.age = self.calculate_business_age()
-        super().save()
+    def save(self, *args, **kwargs):
+        if 'force_insert' in kwargs:
+            kwargs.pop('force_insert')  # Remove force_insert if present
+        self.age = self.calculate_business_age()
+        super().save(*args, **kwargs)
+
+   
 
     """
      @property
@@ -58,6 +61,12 @@ class Business(models.Model):
         today = datetime.date.now()
         age = today - self.registration_date
         return age.days // 365  # Calculate years of operation
+
+
+     def save(self):
+        if self.registration_date and not self.age:
+            self.age = self.calculate_business_age()
+        super().save()
     """
    
     
