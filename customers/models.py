@@ -35,7 +35,7 @@ class Business(models.Model):
     location_building_name = models.CharField(max_length=255,null=True)
     category = models.CharField(max_length=50, choices=BUSINESS_CATEGORIES)
     age = models.IntegerField(null =True,validators=[MinValueValidator(0)]) # type: ignore
-    owner = models.ForeignKey(Customers, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
 
     def calculate_business_age(self):
         today = datetime.now().date()  # Get the current date
